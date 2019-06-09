@@ -8,9 +8,6 @@ class AbstractFile:
     def __str__(self):
         return self.name
 
-    def get_name(self):
-        return self.__str__()
-
     def wrap(self):
         return open(self.get_name(), mode="a")
 
