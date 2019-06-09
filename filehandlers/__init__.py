@@ -2,15 +2,12 @@ import io
 
 
 class AbstractFile:
-    # init class
     def __init__(self, name):
         self.name = name
 
-    # override __str__ method
     def __str__(self):
         return self.name
 
-    # get the name
     def get_name(self):
         return self.__str__()
 
@@ -19,12 +16,12 @@ class AbstractFile:
 
 
 class FileHandler:
-    def __init__(self, abstractFile):
+    def __init__(self, absfile):
         self.cache = []
-        if type(abstractFile) != AbstractFile:
+        if type(absfile) != AbstractFile:
             raise TypeError("the only parameter must be instance of AbstractFile")
         else:
-            self.theFile = abstractFile
+            self.theFile = absfile
 
     def get_file(self):
         return self.theFile
