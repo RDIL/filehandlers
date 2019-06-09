@@ -9,7 +9,7 @@ class AbstractFile:
         return self.name
 
     def wrap(self):
-        return open(self.get_name(), mode="a")
+        return open(self.__str__(), mode="a")
 
 
 class FileHandler:
@@ -24,7 +24,7 @@ class FileHandler:
         return self.theFile
 
     def get_file_name(self):
-        return self.get_file().get_name()
+        return self.get_file().__str__()
 
     def refresh(self):
         with open(self.get_file_name(), mode="r") as filehandler:
