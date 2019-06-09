@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='filehandlers',
-    version='1.1',
+    version='1.2',
     description='Package containing code to help in working with files',
     packages=setuptools.find_packages(),
     author='Cakebot Team',
