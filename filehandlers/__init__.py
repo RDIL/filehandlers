@@ -19,7 +19,7 @@ class FileHandler:
     def __init__(self, absfile):
         self.cache = []
         if type(absfile) != AbstractFile:
-            raise TypeError("the only parameter must be instance of AbstractFile")
+            raise TypeError("the parameter must be instance of AbstractFile")
         else:
             self.theFile = absfile
 
@@ -32,7 +32,7 @@ class FileHandler:
     def refresh(self):
         with open(self.get_file_name(), mode="r") as filehandler:
             if not type(filehandler) is io.TextIOWrapper:
-                raise TypeError("Could not create a TextIOWrapper for the file")
+                raise TypeError("Could not create TextIOWrapper for the file")
             else:
                 self.cache = filehandler.readlines()
                 # strip newlines
