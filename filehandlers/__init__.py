@@ -32,7 +32,7 @@ class AbstractFile(object):
         return open(str(self), mode="a")
 
 
-class Manipulator(object):
+class FileManipulator(object):
     """File handler."""
     def __init__(self, abstract_file):
         """
