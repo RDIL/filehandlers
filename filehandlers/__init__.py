@@ -27,7 +27,7 @@ class AbstractFile(object):
         Wrap file in TextIOWrapper
 
         :return: the wrapper
-        :rtype str:
+        :rtype io.TextIOWrapper:
         """
         return open(str(self), mode="a")
 
@@ -44,11 +44,12 @@ class Manipulator(object):
         :raises: TypeError
         """
         self.cache = []
-        if type(abstract_file) != AbstractFile \
-                and type(abstract_file) == str:
+        if type(abstract_file) == str:
             self.theFile = AbstractFile(abstract_file)
-        else:
+        elif type(abstract_file) == AbstractFile:
             self.theFile = abstract_file
+        else:
+            raise TypeError("Wrong type! Please pass AbstractFile or string")
 
     def get_file(self):
         """
