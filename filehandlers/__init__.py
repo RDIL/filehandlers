@@ -1,7 +1,7 @@
 import io
 
 
-class AbstractFile:
+class AbstractFile(object):
     """A file in instance form."""
     def __init__(self, name):
         """
@@ -27,27 +27,28 @@ class AbstractFile:
         Wrap file in TextIOWrapper
 
         :return: the wrapper
-        :rtype io.TextIOWrapper:
+        :rtype str:
         """
-        return open(self.__str__(), mode="a")
+        return open(str(self), mode="a")
 
 
-class FileHandler:
+class Manipulator(object):
     """File handler."""
-    def __init__(self, absfile):
+    def __init__(self, abstract_file):
         """
         Create class instance
 
-        :param absfile: the AbstractFile instance
+        :param abstract_file: the AbstractFile instance
         :return: nothing
         :rtype None:
         :raises: TypeError
         """
         self.cache = []
-        if type(absfile) != AbstractFile:
-            raise TypeError("Parameter must be instance of AbstractFile")
+        if type(abstract_file) != AbstractFile \
+                and type(abstract_file) == str:
+            self.theFile = AbstractFile(abstract_file)
         else:
-            self.theFile = absfile
+            self.theFile = abstract_file
 
     def get_file(self):
         """
@@ -65,7 +66,7 @@ class FileHandler:
         :return: file name
         :rtype str:
         """
-        return self.get_file().__str__()
+        return str(self.get_file())
 
     def refresh(self):
         """
@@ -74,11 +75,11 @@ class FileHandler:
         :return: nothing
         :rtype None:
         """
-        with open(self.get_file_name(), mode="r") as filehandler:
-            if not type(filehandler) is io.TextIOWrapper:
+        with open(self.get_file_name(), mode="r") as fh:
+            if not type(fh) is io.TextIOWrapper:
                 raise TypeError("Could not create TextIOWrapper for the file")
             else:
-                self.cache = filehandler.readlines()
+                self.cache = fh.readlines()
                 # strip newlines
                 for h, g in enumerate(self.cache):
                     self.cache[h] = self.cache[h].replace("\n", "")
@@ -91,3 +92,11 @@ class FileHandler:
         :rtype list:
         """
         return self.cache
+
+    def clear_file(self):
+        """
+        Clear the file. WARNING: this may be un-reversal
+
+        :return: nothing
+        """
+        open(self.get_file().get_name(), "w")
