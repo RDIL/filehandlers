@@ -100,4 +100,4 @@ class FileManipulator(object):
 
         :return: nothing
         """
-        open(self.get_file().get_name(), "w")
+        open(str(self.get_file()), mode="w")
