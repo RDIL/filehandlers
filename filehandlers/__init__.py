@@ -94,6 +94,9 @@ class FileManipulator(object):
         """
         return self.cache
 
+    def wrap_file(self):
+        return self.theFile.wrap()
+
     def clear_file(self):
         """
         Clear the file. WARNING: this may be un-reversal
