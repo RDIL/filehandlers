@@ -5,13 +5,22 @@ class AbstractFile(object):
     """A file in instance form."""
     def __init__(self, name):
         """
-        Create the class
+        Create the class.
 
         :param name: The file name
         :return: nothing
         :rtype None:
         """
         self.name = name
+
+    def __abs__(self):
+        """
+        Override abs() and __abs__()
+
+        :return: self
+        :rtype filehandlers.AbstractFile:
+        """
+        return self
 
     def __str__(self):
         """
@@ -95,6 +104,12 @@ class FileManipulator(object):
         return self.cache
 
     def wrap_file(self):
+        """
+        Shortcut for .get_file.wrap()
+
+        :return: Wrapper file
+        :rtype io.TextIOWrapper:
+        """
         return self.theFile.wrap()
 
     def clear_file(self):
