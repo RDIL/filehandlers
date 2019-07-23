@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 project = 'filehandlers'
-copyright = '2019-present, RDIL'
+copyright = '2019-present, RDIL.'
 author = 'RDIL'
 
 # Do NOT change:
