@@ -16,7 +16,7 @@ class AbstractFile(object):
 
     def __abs__(self):
         """
-        Override abs() and __abs__()
+        Override :meth:`abs(self)` and :meth:`self.__abs__()`
 
         :return: self
         :rtype: filehandlers.AbstractFile
@@ -25,7 +25,7 @@ class AbstractFile(object):
 
     def __str__(self):
         """
-        Override str() and __str__()
+        Override :meth:`str(self)` and :meth:`self.__str__()`
 
         :return: the name
         :rtype: str
