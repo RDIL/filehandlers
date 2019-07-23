@@ -7,5 +7,10 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     author='Reece Dunham',
     author_email='me@rdil.rocks',
-    url='https://github.com/RDIL/filehandlers'
+    url='https://github.com/RDIL/filehandlers',
+    project_urls={
+        'Documentation': 'https://filehandlers.readthedocs.io',
+        'Source Code': 'https://github.com/RDIL/filehandlers',
+        'Bug Tracker': 'https://github.com/RDIL/filehandlers/issues'
+    }
 )
