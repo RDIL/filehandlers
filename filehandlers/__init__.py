@@ -2,7 +2,19 @@ import io
 
 
 class AbstractFile(object):
-    """A file in instance form."""
+    """
+    A file in instance form.
+
+    .. container:: operations
+        .. describe:: x == y
+            Checks if two AbstractFiles are equal.
+        .. describe:: x != y
+            Checks if two AbstractFiles are not equal.
+        .. describe:: str(x)
+            Returns the AbstractFile's name.
+            :return: The file's name
+            :rtype: str
+    """
 
     def __init__(self, name):
         """
@@ -93,10 +105,11 @@ class FileManipulator(object):
         """
         return str(self.get_file())
 
-    def refresh(self):
+    def refresh(self, slim=False):
         """
-        Update the cache
+        Update the cache.
 
+        :param slim: Optional[:class:`bool`] argument - if empty lines should be removed or not - defaults to class:`True`.
         :return: nothing
         :rtype: None
         """
@@ -107,7 +120,15 @@ class FileManipulator(object):
                 self.cache = fh.readlines()
                 # strip newlines
                 for h, g in enumerate(self.cache):
-                    self.cache[h] = self.cache[h].replace("\n", "")
+                    if(
+                        slim and (
+                            self.cache[h] is None or
+                            self.cache[h] == ""
+                        )
+                    ):
+                        self.cache.pop(h)
+                    else:
+                        self.cache[h] = self.cache[h].replace("\n", "")
 
     def get_cache(self):
         """
