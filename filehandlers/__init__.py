@@ -32,6 +32,18 @@ class AbstractFile(object):
         """
         return self.name
 
+    def change_file_name(self, n):
+        """
+        Changes the file name
+
+        :return: nothing
+        :rtype: None
+        :param n: the new name for the file (must be a string)
+        """
+        if type(n) != str or n is None:
+            raise TypeError("Wrong type! Please pass 'n' as a string!")
+        self.name = n
+
     def wrap(self):
         """
         Wrap file in TextIOWrapper
@@ -99,7 +111,12 @@ class FileManipulator(object):
 
     def get_cache(self):
         """
-        Get the cache
+        Get the cache.
+        The cache will be a list of the file's lines at the time of the
+        last refresh.
+
+        Refreshes are called when this class is created,
+        or when manually triggered by :function:`self.refresh()`.
 
         :return: the cache
         :rtype: list
@@ -108,7 +125,7 @@ class FileManipulator(object):
 
     def wrap_file(self):
         """
-        Shortcut for :method:`get_file().wrap()`
+        Shortcut for :function:`self.get_file().wrap()`
 
         :return: Wrapped file
         :rtype: io.TextIOWrapper
