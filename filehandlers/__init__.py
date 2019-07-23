@@ -61,6 +61,7 @@ class FileManipulator(object):
             self.theFile = abstract_file
         else:
             raise TypeError("Wrong type! Please pass AbstractFile or string")
+        self.refresh()
 
     def get_file(self):
         """
@@ -75,14 +76,14 @@ class FileManipulator(object):
         """
         Get the file's name
 
-        :return: file name
+        :return: The file's name
         :rtype: str
         """
         return str(self.get_file())
 
     def refresh(self):
         """
-        Update the cached lines
+        Update the cache
 
         :return: nothing
         :rtype: None
@@ -107,16 +108,16 @@ class FileManipulator(object):
 
     def wrap_file(self):
         """
-        Shortcut for .get_file().wrap()
+        Shortcut for :method:`get_file().wrap()`
 
-        :return: Wrapper file
+        :return: Wrapped file
         :rtype: io.TextIOWrapper
         """
         return self.theFile.wrap()
 
     def clear_file(self):
         """
-        Clear the file. WARNING: this may be un-reversal
+        Clear the file. WARNING: you may not be able to recover the old contents!
 
         :return: nothing
         :rtype: None
