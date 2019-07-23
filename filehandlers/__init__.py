@@ -2,28 +2,15 @@ import io
 
 
 class AbstractFile(object):
-    """
-    A file in instance form.
-
-    Supported Operations
-    --------------------
-
-    .. container:: custom
-        .. describe:: x == y
-            Checks if two AbstractFiles are equal.
-        .. describe:: x != y
-            Checks if two AbstractFiles are not equal.
-        .. describe:: str(x)
-            Returns the AbstractFile's name.
-    """
+    """A file in instance form."""
 
     def __init__(self, name):
         """
         Create the class.
 
         :param name: The file name
-        :return: nothing
-        :rtype: None
+        :return: None
+        :rtype: NoneType
         """
         self.name = name
 
@@ -49,8 +36,8 @@ class AbstractFile(object):
         """
         Changes the file name
 
-        :return: nothing
-        :rtype: None
+        :return: None
+        :rtype: NoneType
         :param n: the new name for the file (must be a string)
         """
         if type(n) != str or n is None:
@@ -75,8 +62,8 @@ class FileManipulator(object):
         Create class instance
 
         :param abstract_file: the AbstractFile instance
-        :return: nothing
-        :rtype: None
+        :return: None
+        :rtype: NoneType
         :raises: TypeError
         """
         self.cache = []
@@ -111,8 +98,8 @@ class FileManipulator(object):
         Update the cache.
 
         :param slim: (Optional) :class:`bool` - if empty lines should be removed or not - defaults to class:`True`.
-        :return: nothing
-        :rtype: None
+        :return: None
+        :rtype: NoneType
         """
         with open(self.get_file_name(), mode="r") as fh:
             if not type(fh) is io.TextIOWrapper:
@@ -158,7 +145,7 @@ class FileManipulator(object):
         """
         Clear the file. WARNING: you may not be able to recover the old contents!
 
-        :return: nothing
-        :rtype: None
+        :return: None
+        :rtype: NoneType
         """
         open(str(self.get_file()), mode="w")
