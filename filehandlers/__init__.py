@@ -3,13 +3,14 @@ import io
 
 class AbstractFile(object):
     """A file in instance form."""
+
     def __init__(self, name):
         """
         Create the class.
 
         :param name: The file name
         :return: nothing
-        :rtype None:
+        :rtype: None
         """
         self.name = name
 
@@ -18,7 +19,7 @@ class AbstractFile(object):
         Override abs() and __abs__()
 
         :return: self
-        :rtype filehandlers.AbstractFile:
+        :rtype: filehandlers.AbstractFile
         """
         return self
 
@@ -27,7 +28,7 @@ class AbstractFile(object):
         Override str() and __str__()
 
         :return: the name
-        :rtype str:
+        :rtype: str
         """
         return self.name
 
@@ -36,20 +37,21 @@ class AbstractFile(object):
         Wrap file in TextIOWrapper
 
         :return: the wrapper
-        :rtype io.TextIOWrapper:
+        :rtype: io.TextIOWrapper
         """
         return open(str(self), mode="a")
 
 
 class FileManipulator(object):
     """File handler."""
+
     def __init__(self, abstract_file):
         """
         Create class instance
 
         :param abstract_file: the AbstractFile instance
         :return: nothing
-        :rtype None:
+        :rtype: None
         :raises: TypeError
         """
         self.cache = []
@@ -65,7 +67,7 @@ class FileManipulator(object):
         Get the AbstractFile instance.
 
         :return: the AbstractFile instance
-        :rtype AbstractFile:
+        :rtype: AbstractFile
         """
         return self.theFile
 
@@ -74,7 +76,7 @@ class FileManipulator(object):
         Get the file's name
 
         :return: file name
-        :rtype str:
+        :rtype: str
         """
         return str(self.get_file())
 
@@ -83,7 +85,7 @@ class FileManipulator(object):
         Update the cached lines
 
         :return: nothing
-        :rtype None:
+        :rtype: None
         """
         with open(self.get_file_name(), mode="r") as fh:
             if not type(fh) is io.TextIOWrapper:
@@ -99,16 +101,16 @@ class FileManipulator(object):
         Get the cache
 
         :return: the cache
-        :rtype list:
+        :rtype: list
         """
         return self.cache
 
     def wrap_file(self):
         """
-        Shortcut for .get_file.wrap()
+        Shortcut for .get_file().wrap()
 
         :return: Wrapper file
-        :rtype io.TextIOWrapper:
+        :rtype: io.TextIOWrapper
         """
         return self.theFile.wrap()
 
@@ -117,5 +119,6 @@ class FileManipulator(object):
         Clear the file. WARNING: this may be un-reversal
 
         :return: nothing
+        :rtype: None
         """
         open(str(self.get_file()), mode="w")
