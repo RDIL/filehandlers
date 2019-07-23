@@ -12,8 +12,6 @@ class AbstractFile(object):
             Checks if two AbstractFiles are not equal.
         .. describe:: str(x)
             Returns the AbstractFile's name.
-            :return: The file's name
-            :rtype: str
     """
 
     def __init__(self, name):
