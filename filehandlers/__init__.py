@@ -5,7 +5,10 @@ class AbstractFile(object):
     """
     A file in instance form.
 
-    .. container:: operations
+    Supported Operations
+    --------------------
+
+    .. container:: custom
         .. describe:: x == y
             Checks if two AbstractFiles are equal.
         .. describe:: x != y
