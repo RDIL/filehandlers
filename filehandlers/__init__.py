@@ -157,5 +157,6 @@ class FileManipulator(object):
 
         :return: None
         :rtype: NoneType
+        :raises PermissionError: If you don't have needed permission to access the file
         """
         open(str(self.get_file()), mode="w")
