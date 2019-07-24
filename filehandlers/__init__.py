@@ -36,7 +36,7 @@ class AbstractFile(object):
         """
         Changes the file name
 
-        .. information::
+        .. important::
            This doesn't change the file's actual name,
            it changes the name of the file focused on by this AbstractFile instance.
 
