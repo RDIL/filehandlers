@@ -2,13 +2,19 @@ import io
 
 
 class AbstractFile(object):
-    """A file in instance form."""
+    """
+    A file in instance form.
+
+    :param name: The file name
+    :type name: str
+    """
 
     def __init__(self, name):
         """
         Create the class.
 
         :param name: The file name
+        :type name: str
         :return: None
         :rtype: NoneType
         """
