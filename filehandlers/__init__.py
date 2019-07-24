@@ -69,13 +69,19 @@ class AbstractFile(object):
 
 
 class FileManipulator(object):
-    """File handler."""
+    """
+    Class used for managing it's assigned file.
+
+    :param abstract_file: the file to manage
+    :type abstract_file: AbstractFile
+    """
 
     def __init__(self, abstract_file):
         """
         Create class instance
 
         :param abstract_file: the AbstractFile instance
+        :type abstract_file: AbstractFile
         :return: None
         :rtype: NoneType
         :raises: TypeError
