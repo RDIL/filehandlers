@@ -11,7 +11,7 @@ AbstractFile
 .. autoclass:: AbstractFile
     :members:
     :inherited-members:
-    :special-members: __init__
+    :special-members: __init__, __str__
 
 FileManipulator
 ---------------
