@@ -56,6 +56,7 @@ class AbstractFile(object):
 
         :return: the wrapper
         :rtype: io.TextIOWrapper
+        :raises PermissionError: If you don't have needed permission to access the file
         """
         return open(str(self), mode="a")
 
@@ -106,6 +107,7 @@ class FileManipulator(object):
         :param slim: :class:`bool` (Optional) - if empty lines should be removed - defaults to True.
         :return: None
         :rtype: NoneType
+        :raises PermissionError: If you don't have needed permission to access the file
         """
         with open(self.get_file_name(), mode="r") as fh:
             if not type(fh) is io.TextIOWrapper:
