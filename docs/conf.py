@@ -18,6 +18,8 @@ extensions = [
     'sphinx.ext.napoleon'
 ]
 
+autodoc_member_order = 'bysource'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -48,6 +50,8 @@ html_static_path = ['_static']
 
 # If true, copyright is shown in the HTML footer
 html_show_copyright = True
+
+html_show_sphinx = False
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'filehandlersdoc'

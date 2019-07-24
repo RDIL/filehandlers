@@ -3,7 +3,7 @@
 
 
 Welcome to filehandlers's documentation!
-=================================
+========================================
 
 .. toctree::
     :maxdepth: 4

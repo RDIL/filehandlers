@@ -36,6 +36,10 @@ class AbstractFile(object):
         """
         Changes the file name
 
+        .. information::
+           This doesn't change the file's actual name,
+           it changes the name of the file focused on by this AbstractFile instance.
+
         :return: None
         :rtype: NoneType
         :param n: the new name for the file (must be a string)
