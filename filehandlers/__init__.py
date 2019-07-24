@@ -26,18 +26,9 @@ class AbstractFile(object):
         """
         self.name = name
 
-    def __abs__(self):
-        """
-        Override :meth:`abs(self)` and :meth:`self.__abs__()`
-
-        :return: self
-        :rtype: filehandlers.AbstractFile
-        """
-        return self
-
     def __str__(self):
         """
-        Override :meth:`str(self)` and :meth:`self.__str__()`
+        Override :meth:`str` and :meth:`__str__()`.
 
         :return: the name
         :rtype: str
@@ -46,7 +37,7 @@ class AbstractFile(object):
 
     def change_file_name(self, n):
         """
-        Changes the file name
+        Changes the file name.
 
         .. important::
            This doesn't change the file's actual name,
@@ -63,15 +54,34 @@ class AbstractFile(object):
             raise TypeError("Wrong type! Please pass 'n' as a string!")
         self.name = n
 
-    def wrap(self):
+    def wrap(self, doreturn=True):
         """
-        Wrap file in TextIOWrapper
+        Wrap file in TextIOWrapper.
 
+        :param doreturn: *Just keep this True (or don't pass the keyword argument)*.
+        :type doreturn: bool
         :return: the wrapper
         :rtype: io.TextIOWrapper
         :raises PermissionError: If you don't have needed permission to access the file
         """
-        return open(str(self), mode="a")
+        if doreturn:
+            return open(str(self), mode="a")
+        else:
+            open(str(self), mode="a")
+
+    def touch(self):
+        """
+        Create the file if it doesn't already exist.
+
+        .. important::
+           This is the only method that actually changes/interacts with the file
+           inside the AbstractFile class (other than :meth:`wrap`).
+
+        :return: nothing
+        :rtype: NoneType
+        :raises PermissionError: If you don't have needed permission to access the file
+        """
+        self.wrap(False)
 
 
 class FileManipulator(object):
@@ -84,7 +94,7 @@ class FileManipulator(object):
 
     def __init__(self, abstract_file):
         """
-        Create class instance
+        Create class instance.
 
         :param abstract_file: the AbstractFile instance
         :type abstract_file: AbstractFile
@@ -112,7 +122,7 @@ class FileManipulator(object):
 
     def get_file_name(self):
         """
-        Get the file's name
+        Get the file's name.
 
         :return: The file's name
         :rtype: str
@@ -149,6 +159,7 @@ class FileManipulator(object):
     def get_cache(self):
         """
         Get the cache.
+
         The cache will be a list of the file's lines at the time of the
         last refresh.
 
@@ -162,7 +173,7 @@ class FileManipulator(object):
 
     def wrap_file(self):
         """
-        Shortcut for :meth:`get_file().wrap()`
+        Shortcut for :meth:`get_file().wrap()`.
 
         :return: Wrapped file
         :rtype: io.TextIOWrapper
