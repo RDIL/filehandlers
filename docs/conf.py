@@ -1,4 +1,3 @@
-"""Read The Docs configuration."""
 # -*- coding: utf-8 -*-
 
 project = 'filehandlers'
@@ -88,7 +87,9 @@ epub_title = project
 # Files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
 
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {
+    'https://docs.python.org/3/': None
+}
 html_theme_options = {
     'canonical_url': '',
     'analytics_id': '',
