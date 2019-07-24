@@ -9,6 +9,7 @@ Welcome to filehandlers's documentation!
     :maxdepth: 4
     :caption: Contents:
 
+    model
     api
 
 By RDIL [#RDIL]_
