@@ -144,8 +144,8 @@ class FileManipulator(object):
     def clear_file(self):
         """
         Clear the file.
-        .. warning::
-           You may not be able to recover the old contents!
+
+        .. warning:: You may not be able to recover the old contents!
 
         :return: None
         :rtype: NoneType
