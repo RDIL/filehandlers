@@ -147,7 +147,7 @@ class FileManipulator(object):
         last refresh.
 
         Refreshes are called when this class is created,
-        or when manually triggered by :meth:`self.refresh()`.
+        or when manually triggered by :meth:`refresh()`.
 
         :return: the cache
         :rtype: list
@@ -156,7 +156,7 @@ class FileManipulator(object):
 
     def wrap_file(self):
         """
-        Shortcut for :meth:`self.get_file().wrap()`
+        Shortcut for :meth:`get_file().wrap()`
 
         :return: Wrapped file
         :rtype: io.TextIOWrapper
