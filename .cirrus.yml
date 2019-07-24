@@ -1,0 +1,4 @@
+flake8_task:
+  container:
+    image: alpine/flake8:latest
+  script: flake8
