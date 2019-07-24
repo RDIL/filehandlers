@@ -5,7 +5,7 @@ with open("README.md", mode="r") as FILE_HANDLER:
 
 setuptools.setup(
     name='filehandlers',
-    version='2.2',
+    version='2.3',
     license="MIT",
     description='Package containing code to help in working with files.',
     packages=setuptools.find_packages(),
