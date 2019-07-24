@@ -77,7 +77,7 @@ class AbstractFile(object):
            This is the only method that actually changes/interacts with the file
            inside the AbstractFile class (other than :meth:`wrap`).
 
-        :return: nothing
+        :return: None
         :rtype: NoneType
         :raises PermissionError: If you don't have needed permission to access the file
         """
