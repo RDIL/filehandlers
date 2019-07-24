@@ -44,7 +44,8 @@ class AbstractFile(object):
 
         :return: None
         :rtype: NoneType
-        :param n: the new name for the file (must be a string)
+        :param n: the new name for the file
+        :type n: str
         """
         if type(n) != str or n is None:
             raise TypeError("Wrong type! Please pass 'n' as a string!")
@@ -104,7 +105,8 @@ class FileManipulator(object):
         """
         Update the cache.
 
-        :param slim: :class:`bool` (Optional) - if empty lines should be removed - defaults to True.
+        :param slim: (Optional) - if empty lines should be removed - defaults to True.
+        :type slim: bool
         :return: None
         :rtype: NoneType
         :raises PermissionError: If you don't have needed permission to access the file
