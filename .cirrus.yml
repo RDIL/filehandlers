@@ -8,5 +8,5 @@ flake8_task:
 
 package_build_task:
   script: python3 setup.py sdist bdist_wheel
-  build_aftifacts:
+  build_artifacts:
     path: dist/*
