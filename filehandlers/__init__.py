@@ -28,7 +28,7 @@ class AbstractFile(object):
 
     def __str__(self):
         """
-        Override :meth:`str` and :meth:`__str__()`.
+        Override :meth:`str`.
 
         :return: the name
         :rtype: str
