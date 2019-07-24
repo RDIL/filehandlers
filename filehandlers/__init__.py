@@ -97,7 +97,7 @@ class FileManipulator(object):
         """
         Update the cache.
 
-        :param slim: :class:`bool` (Optional) - if empty lines should be removed or not - defaults to True.
+        :param slim: :class:`bool` (Optional) - if empty lines should be removed - defaults to True.
         :return: None
         :rtype: NoneType
         """
