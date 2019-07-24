@@ -97,7 +97,7 @@ class FileManipulator(object):
         """
         Update the cache.
 
-        :param slim: (Optional) :class:`bool` - if empty lines should be removed or not - defaults to class:`True`.
+        :param slim: :class:`bool` (Optional) - if empty lines should be removed or not - defaults to :class:`True`.
         :return: None
         :rtype: NoneType
         """
@@ -143,7 +143,8 @@ class FileManipulator(object):
 
     def clear_file(self):
         """
-        Clear the file. WARNING: you may not be able to recover the old contents!
+        Clear the file.
+        .. warning:: You may not be able to recover the old contents!
 
         :return: None
         :rtype: NoneType
