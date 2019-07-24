@@ -39,6 +39,8 @@ class AbstractFile(object):
         .. important::
            This doesn't change the file's actual name,
            it changes the name of the file focused on by this AbstractFile instance.
+           We suggest you don't use this because you can just create different
+           AbstractFile instances for different files.
 
         :return: None
         :rtype: NoneType
