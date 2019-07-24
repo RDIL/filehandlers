@@ -20,6 +20,7 @@ setuptools.setup(
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     include_package_data=True,
+    zip_safe=False,
     keywords=[
         "file",
         "files",
