@@ -1,4 +1,12 @@
+container:
+  image: python:slim
+
 flake8_task:
   container:
     image: alpine/flake8:latest
   script: flake8
+
+package_build_task:
+  script: python3 setup.py sdist bdist_wheel
+  build_aftifacts:
+    path: dist/*
