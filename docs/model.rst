@@ -1,5 +1,5 @@
 Model
------
+=====
 
 filehandlers is built on a relatively simple model.
 A file is represented with an instance of :meth:`filehandlers.AbstractFile`.
