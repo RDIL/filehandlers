@@ -1,3 +1,9 @@
+"""
+Main module.
+
+.. moduleauthor:: Reece Dunham <me@rdil.rocks>
+"""
+
 import io
 
 
