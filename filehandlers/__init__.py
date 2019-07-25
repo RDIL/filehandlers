@@ -234,7 +234,8 @@ class OpenModes(enum.Enum):
 
        open("myfile.txt", mode=filehandlers.OpenModes.READ)
 
-    This can help so you don't need to remember all the different :code:`mode`s.
+    This can help so you don't need to remember all the different
+    :code:`mode` options.
 
     .. warning::
        For the :code:`write` option, the file will be cleared and
