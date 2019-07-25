@@ -76,5 +76,5 @@ This Code of Conduct is adapted from the Contributor Covenant [#cchome]_, versio
 
 For answers to common questions about this code of conduct, see https://www.contributor-covenant.org/faq
 
-.. [#cchome] https://www.contributor-covenant.org
-.. [#cccoc] https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+.. [#cchome] `Contributor Covenant Website <https://www.contributor-covenant.org>`_
+.. [#cccoc] `Contributor Covenant 1.4 <https://www.contributor-covenant.org/version/1/4/code-of-conduct.html>`_
