@@ -22,8 +22,9 @@ Here you can read about all the code, what it does, and how to use it :D
 
 .. toctree::
     :maxdepth: 4
-    :caption: Contributors:
+    :caption: For Contributors:
 
+    contrib/index
     contrib/code_of_conduct
 
 

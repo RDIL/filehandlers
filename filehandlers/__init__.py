@@ -61,7 +61,7 @@ class AbstractFile(object):
 
         :param doreturn: *Just keep this True (or don't pass the keyword argument)*.
         :type doreturn: bool
-        :return: the wrapper
+        :return: The wrapper
         :rtype: io.TextIOWrapper
         :raises PermissionError: If you don't have needed permission to access the file
         """
