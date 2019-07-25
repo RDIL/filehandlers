@@ -175,9 +175,33 @@ class FileManipulator(object):
         """
         return self.cache
 
+    def write_to_file(self, string):
+        """
+        Write to the file.
+
+        Note:
+           Please ensure that what you are writing to the file
+           is a string.
+
+        :param string: What to write to the file.
+        :type string: str
+        Raises:
+           PermissionError: If you don't have needed permission to access the file
+           TypeError: If you pass an unsupported type to be written
+        :return: None
+        :rtype: NoneType
+        """
+        e = self.wrap_file()
+        e.write(string)
+        e.close()
+
     def wrap_file(self):
         """
         Shortcut for :meth:`get_file().wrap()`.
+
+        See Also
+        --------
+        filehandlers.AbstractFile.wrap
 
         :return: Wrapped file
         :rtype: io.TextIOWrapper
