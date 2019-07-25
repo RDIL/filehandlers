@@ -78,7 +78,7 @@ class AbstractFile(object):
            inside the AbstractFile class (other than :meth:`wrap`).
 
         In case you are wondering, the name for this function comes from the Unix command
-        (:meth:`touch`), which creates a new file with the name as a parameter.
+        (:code:`touch`), which creates a new file with the name as a parameter.
 
         :return: None
         :rtype: NoneType
