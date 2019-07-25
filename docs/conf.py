@@ -21,7 +21,7 @@ extensions = [
 
 autodoc_member_order = 'bysource'
 
-html_baseurl = 'https://filehandlers.readthedocs.io/en/stable/'
+html_baseurl = 'https://filehandlers.readthedocs.io/'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
