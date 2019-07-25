@@ -16,7 +16,7 @@ extensions = [
     'sphinx.ext.extlinks',
     'sphinx.ext.napoleon',
     'sphinx.ext.autosectionlabel',
-    'sphinx-sitemap'
+    'sphinx_sitemap'
 ]
 
 autodoc_member_order = 'bysource'
