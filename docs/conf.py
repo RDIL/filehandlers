@@ -15,13 +15,10 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks',
     'sphinx.ext.napoleon',
-    'sphinx.ext.autosectionlabel',
-    'sphinx_sitemap'
+    'sphinx.ext.autosectionlabel'
 ]
 
 autodoc_member_order = 'bysource'
-
-html_baseurl = 'https://filehandlers.readthedocs.io/'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
