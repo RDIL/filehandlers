@@ -48,6 +48,8 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_extra_path = ['robots.txt']
+
 # If true, copyright is shown in the HTML footer
 html_show_copyright = True
 
