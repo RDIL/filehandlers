@@ -5,6 +5,7 @@ Main module.
 """
 
 import io
+from enum import Enum
 
 
 class AbstractFile(object):
@@ -219,3 +220,32 @@ class FileManipulator(object):
         :raises PermissionError: If you don't have needed permission to access the file
         """
         open(str(self.get_file()), mode="w").close()
+
+
+class OpenModes(Enum):
+    """
+    :meth:`enums.Enum` for the different options you can pass to the
+    keyword argument :code:`mode` in Python's :meth:`builtins.open`
+    function.
+
+    It can be used like this:
+
+    .. code-block:: python
+
+       open("myfile.txt", mode=filehandlers.OpenModes.read)
+
+    This can help so you don't need to remember all the different :code:`mode`s.
+
+    .. warning::
+       For the :code:`write` option, the file will be cleared and
+       then written to. To avoid this, use :code:`append` instead!
+    """
+    read = "r"  #: Read only access to the file
+    write = "w"  #: Write only access to the file - ***see warning above***
+    clear = write  #: Clear the file
+    append = "a"  #: Append to the end of the file (also gives read!)
+    create = "x"  #: Create the file - ***raises error if file exists***
+    create_and_write = "w+"  #: Create the file and ready it to be written to
+    text = "t"  #: Default
+    binary = "b"  #: Open in binary mode
+    updating = "+"  #: This will open a file for reading and writing (updating)

@@ -20,3 +20,10 @@ FileManipulator
     :members:
     :inherited-members:
     :special-members: __init__
+
+OpenModes
+---------
+
+.. autoclass:: OpenModes
+   :members:
+   :undoc-members:
