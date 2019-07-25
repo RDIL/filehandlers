@@ -18,7 +18,7 @@ Now, say you want to change that :ref:`file`... that is where :meth:`filehandler
 You need to pass the :meth:`filehandlers.AbstractFile` instance when creating a :meth:`filehandlers.FileManipulator` because
 otherwise the manipulator can't do it's job.
 
-The manipulator includes code for a number of common functions that could be achived with other code, but the goal of creating
+The manipulator includes code for a number of common functions that could be replicated with other code, but the goal of creating
 this model/API is to simplify it!
 
 Simple Example
