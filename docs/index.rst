@@ -5,6 +5,13 @@
 Welcome to filehandlers's documentation!
 ========================================
 
+By RDIL [#RDIL]_
+
+View on `GitHub`_ | `PyPI`_
+
+Welcome to the docs.
+Here you can read about all the code, what it does, and how to use it :D
+
 .. toctree::
     :maxdepth: 4
     :caption: Contents:
@@ -12,12 +19,12 @@ Welcome to filehandlers's documentation!
     model
     api
 
-By RDIL [#RDIL]_
 
-View on `GitHub`_ | `PyPI`_
+.. toctree::
+    :maxdepth: 4
+    :caption: Contributors:
 
-Welcome to the docs.
-Here you can read about all the code, what it does, and how to use it :D
+    contrib/code_of_conduct
 
 
 .. _`GitHub`: https://github.com/RDIL/filehandlers
