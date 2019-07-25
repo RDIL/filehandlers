@@ -67,7 +67,7 @@ class AbstractFile(object):
         if doreturn:
             return open(str(self), mode="a")
         else:
-            open(str(self), mode="a")
+            open(str(self), mode="a").close()
 
     def touch(self):
         """
@@ -158,6 +158,7 @@ class FileManipulator(object):
                         self.cache.pop(h)
                     else:
                         self.cache[h] = self.cache[h].replace("\n", "")
+                fh.close()
 
     def get_cache(self):
         """
@@ -193,4 +194,4 @@ class FileManipulator(object):
         :rtype: NoneType
         :raises PermissionError: If you don't have needed permission to access the file
         """
-        open(str(self.get_file()), mode="w")
+        open(str(self.get_file()), mode="w").close()
