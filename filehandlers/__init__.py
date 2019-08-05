@@ -232,7 +232,8 @@ class OpenModes(enum.Enum):
 
     .. code-block:: python
 
-       open("myfile.txt", mode=filehandlers.OpenModes.READ)
+       from filehandlers import OpenModes
+       open("myfile.txt", mode=OpenModes.READ.value)
 
     This can help so you don't need to remember all the different
     :code:`mode` options.
