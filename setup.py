@@ -5,7 +5,7 @@ with open("README.md", mode="r") as FILE_HANDLER:
 
 setuptools.setup(
     name='filehandlers',
-    version='2.6',
+    version='2.7',
     license="MIT",
     description='Package containing code to help in working with files.',
     packages=setuptools.find_packages(),
@@ -13,7 +13,7 @@ setuptools.setup(
     author_email='me@rdil.rocks',
     url='https://github.com/RDIL/filehandlers',
     project_urls={
-        'Documentation': 'https://filehandlers.readthedocs.io',
+        'Documentation': 'https://filehandlers.rdil.rocks',
         'Source Code': 'https://github.com/RDIL/filehandlers',
         'Bug Tracker': 'https://github.com/RDIL/filehandlers/issues'
     },
