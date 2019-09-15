@@ -221,6 +221,18 @@ class FileManipulator(object):
         """
         open(str(self.get_file()), mode="w").close()
 
+    def get_file_contents_singlestring(self):
+        """
+        Get the file's contents, but as one string.
+
+        .. note:: This function does not use the cache.
+
+        :return: The file's contents
+        :rtype: str
+        :raises PermissionError: If you don't have needed permission to access the file
+        """
+        return open(str(self.get_file()), mode="r").read()
+
 
 class OpenModes(enum.Enum):
     """
