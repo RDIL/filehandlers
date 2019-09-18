@@ -5,6 +5,7 @@ Main module.
 """
 
 import io
+import os
 import enum
 
 
@@ -76,7 +77,7 @@ class AbstractFile(object):
 
         .. important::
            This is the only method that actually changes/interacts with the file
-           inside the AbstractFile class (other than :meth:`wrap`).
+           inside the AbstractFile class (other than :meth:`wrap` and :meth:`exists`).
 
         In case you are wondering, the name for this function comes from the Unix command
         (:code:`touch`), which creates a new file with the name as a parameter.
@@ -86,6 +87,24 @@ class AbstractFile(object):
         :raises PermissionError: If you don't have needed permission to access the file
         """
         self.wrap(False)
+
+    def exists(self, touch_if_false=False):
+        """
+        Get if this file exists or not (boolean value).
+
+        :return: If the focused file exists
+        :rtype: bool:
+        :param touch_if_false: If the file should be created if it doesn't exist. Defaults to False.
+        :type touch_if_false: bool
+        :throws PermissionError: If you don't have the required permissions to access the file.
+        """
+        e = False
+        if(os.path.exists(self.name)):
+            e = True
+            if(touch_if_false):
+                self.touch()
+        return e
+        
 
 
 class FileManipulator(object):
