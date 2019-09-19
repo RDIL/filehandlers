@@ -104,7 +104,6 @@ class AbstractFile(object):
             if(touch_if_false):
                 self.touch()
         return e
-        
 
 
 class FileManipulator(object):
