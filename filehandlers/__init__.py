@@ -99,9 +99,9 @@ class AbstractFile(object):
         :throws PermissionError: If you don't have the required permissions to access the file.
         """
         e = False
-        if(os.path.exists(self.name)):
+        if os.path.exists(self.name):
             e = True
-            if(touch_if_false):
+            if touch_if_false:
                 self.touch()
         return e
 
