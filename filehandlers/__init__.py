@@ -241,7 +241,7 @@ class FileManipulator(object):
 
     def get_file_contents_singlestring(self):
         """
-        Get the file's contents, but as one string.
+        Get the file's contents, but as one multi-line string.
 
         .. note:: This function does not use the cache.
 
@@ -250,6 +250,19 @@ class FileManipulator(object):
         :raises PermissionError: If you don't have needed permission to access the file
         """
         return open(str(self.get_file()), mode="r").read()
+
+    def delete(self):
+        """
+        Delete the file if it exists.
+
+        :returns: if it got deleted or not (can be ignored by calling the method instead of assigning it to a variable)
+        :rtype: bool
+        :raises PermissionError: If you don't have needed permission to access the fil
+        """
+        if self.get_file().exists():
+            os.remove(str(self.get_file()))
+            return True
+        return False
 
 
 class OpenModes(enum.Enum):
