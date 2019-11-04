@@ -93,7 +93,7 @@ class AbstractFile(object):
         Get if this file exists or not (boolean value).
 
         :return: If the focused file exists
-        :rtype: bool:
+        :rtype: bool
         :param touch_if_false: If the file should be created if it doesn't exist. Defaults to False.
         :type touch_if_false: bool
         :throws PermissionError: If you don't have the required permissions to access the file.
@@ -243,7 +243,7 @@ class FileManipulator(object):
         """
         Get the file's contents, but as one multi-line string.
 
-        .. note:: This function does not use the cache.
+        .. important:: This function does not use the cache.
 
         :return: The file's contents
         :rtype: str
