@@ -7,6 +7,7 @@ Main module.
 import io
 import os
 import enum
+from typing import Optional  # noqa
 
 
 class AbstractFile(object):
@@ -17,7 +18,7 @@ class AbstractFile(object):
     :type name: str
     """
 
-    def __init__(self, name):
+    def __init__(self, name: str):
         """
         Create the class.
 
@@ -28,7 +29,7 @@ class AbstractFile(object):
         """
         self.name = name
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Override :meth:`str`.
 
@@ -56,22 +57,17 @@ class AbstractFile(object):
             raise TypeError("Wrong type! Please pass 'n' as a string!")
         self.name = n
 
-    def wrap(self, doreturn=True):
+    def wrap(self) -> io.TextIOWrapper:
         """
         Wrap file in TextIOWrapper.
 
-        :param doreturn: *Just keep this True (or don't pass the keyword argument)*.
-        :type doreturn: bool
         :return: The wrapper
         :rtype: io.TextIOWrapper
         :raises PermissionError: If you don't have needed permission to access the file
         """
-        if doreturn:
-            return open(str(self), mode="a")
-        else:
-            open(str(self), mode="a").close()
+        return open(str(self), mode="a")
 
-    def touch(self):
+    def touch(self) -> None:
         """
         Create the file if it doesn't already exist.
 
@@ -83,19 +79,19 @@ class AbstractFile(object):
         (:code:`touch`), which creates a new file with the name as a parameter.
 
         :return: None
-        :rtype: NoneType
+        :rtype: None
         :raises PermissionError: If you don't have needed permission to access the file
         """
-        self.wrap(False)
+        self.wrap().close()
 
-    def exists(self, touch_if_false=False):
+    def exists(self, touch_if_false: Optional[bool] = False) -> bool:
         """
         Get if this file exists or not (boolean value).
 
         :return: If the focused file exists
         :rtype: bool
         :param touch_if_false: If the file should be created if it doesn't exist. Defaults to False.
-        :type touch_if_false: bool
+        :type touch_if_false: Optional[bool]
         :throws PermissionError: If you don't have the required permissions to access the file.
         """
         e = False
@@ -114,14 +110,14 @@ class FileManipulator(object):
     :type abstract_file: AbstractFile
     """
 
-    def __init__(self, abstract_file):
+    def __init__(self, abstract_file) -> None:
         """
         Create class instance.
 
         :param abstract_file: the AbstractFile instance
         :type abstract_file: AbstractFile
         :return: None
-        :rtype: NoneType
+        :rtype: None
         :raises: TypeError
         """
         self.cache = []
@@ -133,7 +129,7 @@ class FileManipulator(object):
             raise TypeError("Wrong type! Please pass AbstractFile or string")
         self.refresh()
 
-    def get_file(self):
+    def get_file(self) -> AbstractFile:
         """
         Get the AbstractFile instance.
 
@@ -155,10 +151,10 @@ class FileManipulator(object):
         """
         Update the cache.
 
-        :param slim: (Optional) - if empty lines should be removed - defaults to True.
-        :type slim: bool
+        :param slim: if empty lines should be removed - defaults to True.
+        :type slim: Optional[bool]
         :return: None
-        :rtype: NoneType
+        :rtype: None
         :raises PermissionError: If you don't have needed permission to access the file
         """
         with open(self.get_file_name(), mode="r") as fh:
@@ -208,13 +204,13 @@ class FileManipulator(object):
            PermissionError: If you don't have needed permission to access the file
            TypeError: If you pass an unsupported type to be written
         :return: None
-        :rtype: NoneType
+        :rtype: None
         """
         e = self.wrap_file()
         e.write(string)
         e.close()
 
-    def wrap_file(self):
+    def wrap_file(self) -> io.TextIOWrapper:
         """
         Shortcut for :meth:`get_file().wrap()`.
 
@@ -231,7 +227,7 @@ class FileManipulator(object):
         """
         Clear the file.
 
-        .. warning:: You may not be able to recover the old contents!
+        .. warning:: You will not be able to recover the old contents!
 
         :return: None
         :rtype: NoneType
@@ -255,7 +251,7 @@ class FileManipulator(object):
         """
         Delete the file if it exists.
 
-        :returns: if it got deleted or not (can be ignored by calling the method instead of assigning it to a variable)
+        :returns: If it got deleted or not (can be ignored by calling the method instead of assigning it to a variable)
         :rtype: bool
         :raises PermissionError: If you don't have needed permission to access the fil
         """
