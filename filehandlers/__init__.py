@@ -38,25 +38,6 @@ class AbstractFile(object):
         """
         return self.name
 
-    def change_file_name(self, n):
-        """
-        Changes the file name.
-
-        .. important::
-           This doesn't change the file's actual name,
-           it changes the name of the file focused on by this AbstractFile instance.
-           We suggest you don't use this because you can just create different
-           AbstractFile instances for different files.
-
-        :return: None
-        :rtype: NoneType
-        :param n: the new name for the file
-        :type n: str
-        """
-        if type(n) != str or n is None:
-            raise TypeError("Wrong type! Please pass 'n' as a string!")
-        self.name = n
-
     def wrap(self) -> io.TextIOWrapper:
         """
         Wrap file in TextIOWrapper.
@@ -138,7 +119,7 @@ class FileManipulator(object):
         """
         return self.theFile
 
-    def get_file_name(self):
+    def get_file_name(self) -> str:
         """
         Get the file's name.
 
@@ -175,7 +156,7 @@ class FileManipulator(object):
                         self.cache[h] = self.cache[h].replace("\n", "")
                 fh.close()
 
-    def get_cache(self):
+    def get_cache(self) -> list:
         """
         Get the cache.
 
@@ -190,7 +171,7 @@ class FileManipulator(object):
         """
         return self.cache
 
-    def write_to_file(self, string):
+    def write_to_file(self, string: str):
         """
         Write to the file.
 
@@ -251,7 +232,7 @@ class FileManipulator(object):
         """
         Delete the file if it exists.
 
-        :returns: If it got deleted or not (can be ignored by calling the method instead of assigning it to a variable)
+        :returns: If it got deleted or not (can be ignored by just calling the method)
         :rtype: bool
         :raises PermissionError: If you don't have needed permission to access the fil
         """
