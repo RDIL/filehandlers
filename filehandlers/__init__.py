@@ -7,14 +7,16 @@ Main module.
 import io
 import os
 import enum
-from typing import Optional  # noqa
+from json import loads
+from json.decoder import JSONDecodeError  # noqa
+from typing import Optional, Dict, Any, List
 
 
 class AbstractFile(object):
     """
     A file in instance form.
 
-    :param name: The file name
+    :param name: The file name.
     :type name: str
     """
 
@@ -22,10 +24,10 @@ class AbstractFile(object):
         """
         Create the class.
 
-        :param name: The file name
+        :param name: The file name.
         :type name: str
         :return: None
-        :rtype: NoneType
+        :rtype: None
         """
         self.name = name
 
@@ -33,22 +35,22 @@ class AbstractFile(object):
         """
         Override :meth:`str`.
 
-        :return: the name
+        :returns: The name of the file.
         :rtype: str
         """
         return self.name
 
-    def wrap(self) -> io.TextIOWrapper:
+    def wrap(self):
         """
         Wrap file in TextIOWrapper.
 
-        :return: The wrapper
+        :return: The wrapper.
         :rtype: io.TextIOWrapper
-        :raises PermissionError: If you don't have needed permission to access the file
+        :raises PermissionError: If you don't have needed permission to access the file.
         """
         return open(str(self), mode="a")
 
-    def touch(self) -> None:
+    def touch(self):
         """
         Create the file if it doesn't already exist.
 
@@ -59,9 +61,9 @@ class AbstractFile(object):
         In case you are wondering, the name for this function comes from the Unix command
         (:code:`touch`), which creates a new file with the name as a parameter.
 
-        :return: None
+        :returns: None
         :rtype: None
-        :raises PermissionError: If you don't have needed permission to access the file
+        :raises PermissionError: If you don't have needed permission to access the file.
         """
         self.wrap().close()
 
@@ -87,21 +89,21 @@ class FileManipulator(object):
     """
     Class used for managing it's assigned file.
 
-    :param abstract_file: the file to manage
+    :param abstract_file: The file to manipulate.
     :type abstract_file: AbstractFile
     """
 
-    def __init__(self, abstract_file) -> None:
+    def __init__(self, abstract_file):
         """
         Create class instance.
 
-        :param abstract_file: the AbstractFile instance
+        :param abstract_file: The AbstractFile instance.
         :type abstract_file: AbstractFile
-        :return: None
+        :returns: None
         :rtype: None
         :raises: TypeError
         """
-        self.cache = []
+        self.cache: List[str] = []
         if type(abstract_file) == str:
             self.theFile = AbstractFile(abstract_file)
         elif type(abstract_file) == AbstractFile:
@@ -114,7 +116,7 @@ class FileManipulator(object):
         """
         Get the AbstractFile instance.
 
-        :return: the AbstractFile instance
+        :returns: The AbstractFile instance.
         :rtype: AbstractFile
         """
         return self.theFile
@@ -123,7 +125,7 @@ class FileManipulator(object):
         """
         Get the file's name.
 
-        :return: The file's name
+        :return: The file's name.
         :rtype: str
         """
         return str(self.get_file())
@@ -134,9 +136,9 @@ class FileManipulator(object):
 
         :param slim: if empty lines should be removed - defaults to True.
         :type slim: Optional[bool]
-        :return: None
+        :returns: None
         :rtype: None
-        :raises PermissionError: If you don't have needed permission to access the file
+        :raises PermissionError: If you don't have needed permission to access the file.
         """
         with open(self.get_file_name(), mode="r") as fh:
             if not type(fh) is io.TextIOWrapper:
@@ -156,7 +158,7 @@ class FileManipulator(object):
                         self.cache[h] = self.cache[h].replace("\n", "")
                 fh.close()
 
-    def get_cache(self) -> list:
+    def get_cache(self) -> List[str]:
         """
         Get the cache.
 
@@ -166,8 +168,8 @@ class FileManipulator(object):
         Refreshes are called when this class is created,
         or when manually triggered by :meth:`refresh()`.
 
-        :return: the cache
-        :rtype: list
+        :returns: The cache.
+        :rtype: List[str]
         """
         return self.cache
 
@@ -182,9 +184,9 @@ class FileManipulator(object):
         :param string: What to write to the file.
         :type string: str
         Raises:
-           PermissionError: If you don't have needed permission to access the file
-           TypeError: If you pass an unsupported type to be written
-        :return: None
+           PermissionError: If you don't have needed permission to access the file.
+           TypeError: If you pass an unsupported type to be written.
+        :returns: None
         :rtype: None
         """
         e = self.wrap_file()
@@ -199,7 +201,7 @@ class FileManipulator(object):
         --------
         :meth:`filehandlers.AbstractFile.wrap`
 
-        :return: Wrapped file
+        :returns: The wrapped file.
         :rtype: io.TextIOWrapper
         """
         return self.theFile.wrap()
@@ -210,9 +212,9 @@ class FileManipulator(object):
 
         .. warning:: You will not be able to recover the old contents!
 
-        :return: None
-        :rtype: NoneType
-        :raises PermissionError: If you don't have needed permission to access the file
+        :returns: None
+        :rtype: None
+        :raises PermissionError: If you don't have needed permission to access the file.
         """
         open(str(self.get_file()), mode="w").close()
 
@@ -222,9 +224,9 @@ class FileManipulator(object):
 
         .. important:: This function does not use the cache.
 
-        :return: The file's contents
+        :returns: The file's contents.
         :rtype: str
-        :raises PermissionError: If you don't have needed permission to access the file
+        :raises PermissionError: If you don't have needed permission to access the file.
         """
         return open(str(self.get_file()), mode="r").read()
 
@@ -232,14 +234,24 @@ class FileManipulator(object):
         """
         Delete the file if it exists.
 
-        :returns: If it got deleted or not (can be ignored by just calling the method)
+        :returns: If it got deleted or not (can be ignored by just calling the method).
         :rtype: bool
-        :raises PermissionError: If you don't have needed permission to access the fil
+        :raises PermissionError: If you don't have needed permission to access the file.
         """
         if self.get_file().exists():
             os.remove(str(self.get_file()))
             return True
         return False
+
+    def load_json(self) -> Dict[Any, Any]:
+        """
+        Loads the file, and returns the dictionary containing the data.
+
+        :returns: The dictionary with the data.
+        :rtype: Dict[Any, Any]
+        :raises JSONDecodeError: If it isn't valid JSON.
+        """
+        return loads(self.get_file_contents_singlestring())
 
 
 class OpenModes(enum.Enum):
@@ -261,13 +273,20 @@ class OpenModes(enum.Enum):
     .. warning::
        For the :code:`write` option, the file will be cleared and
        then written to. To avoid this, use :code:`append` instead!
+
+    .. note::
+        Text mode should be used when writing text files
+        (whether using plain text or a text-based format like TXT),
+        while binary mode must be used when writing non-text files like images.
     """
-    READ = "r"  #: Read only access to the file
-    WRITE = "w"  #: Write only access to the file - ***see warning above***
-    CLEAR = WRITE  #: Clear the file
-    APPEND = "a"  #: Append to the end of the file (also gives read!)
-    CREATE = "x"  #: Create the file - ***raises error if file exists***
-    CREATE_AND_WRITE = "w+"  #: Create the file and ready it to be written to
-    TEXT = "t"  #: Default
-    BINARY = "b"  #: Open in binary mode
-    UPDATING = "+"  #: This will open a file for reading and writing (updating)
+    READ = "r"  #: Read only access to the file.
+    READ_BINARY = "rb"  # Read only access to the file (binary enabled).
+    WRITE = "w"  #: Write only access to the file - ***see warning above***.
+    WRITE_BINARY = "wb"  # Write only access to the file - ***see warning above*** (binary enabled).
+    CLEAR = WRITE  #: Clear the file.
+    APPEND = "a"  #: Append to the end of the file (also gives read!).
+    CREATE = "x"  #: Create the file - ***raises error if file exists***.
+    CREATE_AND_WRITE = "w+"  #: Create the file and ready it to be written to.
+    TEXT = "t"  #: Default.
+    BINARY = "b"  #: Open in binary mode.
+    UPDATING = "+"  #: This will open a file for reading and writing (updating).

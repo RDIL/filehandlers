@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 project = 'filehandlers'
-copyright = '2019-present, RDIL.'
-author = 'RDIL'
+copyright = '2019-present, Reece Dunham.'
+author = 'Reece Dunham'
 
 # Do NOT change:
 version = ''
@@ -17,8 +17,6 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.autosectionlabel'
 ]
-
-autodoc_member_order = 'bysource'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -65,7 +63,7 @@ latex_elements = {
 
 latex_documents = [
     (master_doc, 'filehandlers.tex', 'filehandlers Documentation',
-     'RDIL', 'manual'),
+     'Reece Dunham', 'manual'),
 ]
 
 # One entry per manual page. List of tuples
@@ -80,7 +78,7 @@ man_pages = [
 # dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'filehandlers', 'filehandlers Documentation',
-     author, 'filehandlers', 'Package containing code to help in working with files',
+     author, 'filehandlers', 'Package containing code to help in working with files.',
      'Miscellaneous'),
 ]
 
