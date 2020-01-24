@@ -26,7 +26,7 @@ class AbstractFile(object):
 
         :param name: The file name.
         :type name: str
-        :return: None
+        :returns: None
         :rtype: None
         """
         self.name = name
@@ -44,7 +44,7 @@ class AbstractFile(object):
         """
         Wrap file in TextIOWrapper.
 
-        :return: The wrapper.
+        :returns: The wrapper.
         :rtype: io.TextIOWrapper
         :raises PermissionError: If you don't have needed permission to access the file.
         """
@@ -71,7 +71,7 @@ class AbstractFile(object):
         """
         Get if this file exists or not (boolean value).
 
-        :return: If the focused file exists
+        :returns: If the focused file exists.
         :rtype: bool
         :param touch_if_false: If the file should be created if it doesn't exist. Defaults to False.
         :type touch_if_false: Optional[bool]
@@ -125,7 +125,7 @@ class FileManipulator(object):
         """
         Get the file's name.
 
-        :return: The file's name.
+        :returns: The file's name.
         :rtype: str
         """
         return str(self.get_file())
@@ -243,7 +243,7 @@ class FileManipulator(object):
             return True
         return False
 
-    def load_json(self) -> Dict[Any, Any]:
+    def load_from_json(self) -> Dict[Any, Any]:
         """
         Loads the file, and returns the dictionary containing the data.
 
