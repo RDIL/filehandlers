@@ -1,8 +1,4 @@
-"""
-Main module.
-
-.. moduleauthor:: Reece Dunham <me@rdil.rocks>
-"""
+"""The main module."""
 
 import io
 import os
@@ -12,41 +8,38 @@ from json.decoder import JSONDecodeError  # noqa
 from typing import Optional, Dict, Any, List
 
 
-class AbstractFile(object):
-    """
-    A file in instance form.
-
-    :param name: The file name.
-    :type name: str
-    """
+class AbstractFile:
+    """A file in instance form."""
 
     def __init__(self, name: str):
         """
         Create the class.
 
-        :param name: The file name.
-        :type name: str
-        :returns: None
-        :rtype: None
+        Args:
+            name: The file name.
+
+        Returns:
+            Nothing.
         """
         self.name = name
 
     def __str__(self) -> str:
         """
-        Override :meth:`str`.
+        Override of `__str__`.
 
-        :returns: The name of the file.
-        :rtype: str
+        Returns:
+            The name of the file.
         """
         return self.name
 
     def wrap(self):
         """
-        Wrap file in TextIOWrapper.
+        Wrap the file in a [io.TextIOWrapper].
 
-        :returns: The wrapper.
-        :rtype: io.TextIOWrapper
-        :raises PermissionError: If you don't have needed permission to access the file.
+        Returns:
+            The wrapper.
+        Raises:
+            PermissionError: If you don't have needed permission to access the file.
         """
         return open(str(self), mode="a")
 
@@ -54,16 +47,18 @@ class AbstractFile(object):
         """
         Create the file if it doesn't already exist.
 
-        .. important::
+        Important:
            This is the only method that actually changes/interacts with the file
-           inside the AbstractFile class (other than :meth:`wrap` and :meth:`exists`).
+           inside the AbstractFile class (other then [wrap] and [exists]).
 
         In case you are wondering, the name for this function comes from the Unix command
-        (:code:`touch`), which creates a new file with the name as a parameter.
+        `touch`, which creates a new file with the name as a parameter.
 
-        :returns: None
-        :rtype: None
-        :raises PermissionError: If you don't have needed permission to access the file.
+        Returns:
+            Nothing.
+
+        Raises:
+            PermissionError: If you don't have needed permission to access the file.
         """
         self.wrap().close()
 
@@ -71,11 +66,14 @@ class AbstractFile(object):
         """
         Get if this file exists or not (boolean value).
 
-        :returns: If the focused file exists.
-        :rtype: bool
-        :param touch_if_false: If the file should be created if it doesn't exist. Defaults to False.
-        :type touch_if_false: Optional[bool]
-        :throws PermissionError: If you don't have the required permissions to access the file.
+        Returns:
+            If the file exists.
+
+        Arguments:
+            touch_if_false: If the file should be created if it doesn't exist.
+
+        Raises:
+            PermissionError: If you don't have the required permissions to access the file.
         """
         e = False
         if os.path.exists(self.name):
@@ -85,28 +83,26 @@ class AbstractFile(object):
         return e
 
 
-class FileManipulator(object):
-    """
-    Class used for managing it's assigned file.
+class FileManipulator:
+    """Class used for managing an assigned file."""
+    cache: List[str]
+    theFile: AbstractFile
 
-    :param abstract_file: The file to manipulate.
-    :type abstract_file: AbstractFile
-    """
-
-    def __init__(self, abstract_file):
+    def __init__(self, abstract_file: AbstractFile):
         """
         Create class instance.
 
-        :param abstract_file: The AbstractFile instance.
-        :type abstract_file: AbstractFile
-        :returns: None
-        :rtype: None
-        :raises: TypeError
+        Arguments:
+            abstract_file: The AbstractFile instance.
+
+        Returns:
+            Nothing.
+
+        Raises:
+            TypeError: If the argument isn't an [AbstractFile].
         """
-        self.cache: List[str] = []
-        if type(abstract_file) == str:
-            self.theFile = AbstractFile(abstract_file)
-        elif type(abstract_file) == AbstractFile:
+        self.cache = []
+        if type(abstract_file) == AbstractFile:
             self.theFile = abstract_file
         else:
             raise TypeError("Wrong type! Please pass AbstractFile or string")
@@ -116,8 +112,8 @@ class FileManipulator(object):
         """
         Get the AbstractFile instance.
 
-        :returns: The AbstractFile instance.
-        :rtype: AbstractFile
+        Returns:
+            The AbstractFile instance.
         """
         return self.theFile
 
@@ -125,20 +121,23 @@ class FileManipulator(object):
         """
         Get the file's name.
 
-        :returns: The file's name.
-        :rtype: str
+        Returns:
+            The file's name.
         """
         return str(self.get_file())
 
-    def refresh(self, slim=False):
+    def refresh(self, slim: Optional[bool] = False):
         """
         Update the cache.
 
-        :param slim: if empty lines should be removed - defaults to True.
-        :type slim: Optional[bool]
-        :returns: None
-        :rtype: None
-        :raises PermissionError: If you don't have needed permission to access the file.
+        Arguments:
+            slim: If empty lines should be removed.
+
+        Returns:
+            Nothing.
+
+        Raises:
+            PermissionError: If you don't have needed permission to access the file.
         """
         with open(self.get_file_name(), mode="r") as fh:
             if not type(fh) is io.TextIOWrapper:
@@ -166,10 +165,10 @@ class FileManipulator(object):
         last refresh.
 
         Refreshes are called when this class is created,
-        or when manually triggered by :meth:`refresh()`.
+        or when manually triggered by [refresh].
 
-        :returns: The cache.
-        :rtype: List[str]
+        Returns:
+            The cache.
         """
         return self.cache
 
@@ -181,13 +180,15 @@ class FileManipulator(object):
            Please ensure that what you are writing to the file
            is a string.
 
-        :param string: What to write to the file.
-        :type string: str
+        Arguments:
+            string: What to write to the file.
+
         Raises:
            PermissionError: If you don't have needed permission to access the file.
            TypeError: If you pass an unsupported type to be written.
-        :returns: None
-        :rtype: None
+
+        Returns:
+            Nothing.
         """
         e = self.wrap_file()
         e.write(string)
@@ -195,14 +196,10 @@ class FileManipulator(object):
 
     def wrap_file(self) -> io.TextIOWrapper:
         """
-        Shortcut for :meth:`get_file().wrap()`.
+        Shortcut for `self.get_file().wrap()`.
 
-        See Also
-        --------
-        :meth:`filehandlers.AbstractFile.wrap`
-
-        :returns: The wrapped file.
-        :rtype: io.TextIOWrapper
+        Returns:
+            The wrapped file.
         """
         return self.theFile.wrap()
 
@@ -210,23 +207,27 @@ class FileManipulator(object):
         """
         Clear the file.
 
-        .. warning:: You will not be able to recover the old contents!
+        Warning: You will not be able to recover the old contents!
 
-        :returns: None
-        :rtype: None
-        :raises PermissionError: If you don't have needed permission to access the file.
+        Returns:
+            Nothing.
+
+        Raises:
+            PermissionError: If you don't have needed permission to access the file.
         """
         open(str(self.get_file()), mode="w").close()
 
-    def get_file_contents_singlestring(self):
+    def get_file_contents_singlestring(self) -> str:
         """
         Get the file's contents, but as one multi-line string.
 
-        .. important:: This function does not use the cache.
+        Important: This function does not use the cache.
 
-        :returns: The file's contents.
-        :rtype: str
-        :raises PermissionError: If you don't have needed permission to access the file.
+        Returns:
+            The file's contents.
+
+        Raises:
+            PermissionError: If you don't have needed permission to access the file.
         """
         return open(str(self.get_file()), mode="r").read()
 
@@ -234,47 +235,50 @@ class FileManipulator(object):
         """
         Delete the file if it exists.
 
-        :returns: If it got deleted or not (can be ignored by just calling the method).
-        :rtype: bool
-        :raises PermissionError: If you don't have needed permission to access the file.
+        Returns:
+            If it got deleted or not (can be ignored by just calling the method).
+
+        Raises:
+            PermissionError: If you don't have needed permission to access the file.
         """
         if self.get_file().exists():
             os.remove(str(self.get_file()))
             return True
         return False
 
-    def load_from_json(self) -> Dict[Any, Any]:
+    def load_from_json(self) -> Dict[str, Any]:
         """
         Loads the file, and returns the dictionary containing the data.
 
-        :returns: The dictionary with the data.
-        :rtype: Dict[Any, Any]
-        :raises JSONDecodeError: If it isn't valid JSON.
+        Returns:
+            The dictionary with the data.
+
+        Raises:
+            JSONDecodeError: If it isn't valid JSON.
         """
         return loads(self.get_file_contents_singlestring())
 
 
 class OpenModes(enum.Enum):
     """
-    :meth:`enum.Enum` for the different options you can pass to the
-    keyword argument :code:`mode` in Python's :meth:`builtins.open`
-    function.
+    [Enum][enum.Enum] for the different options you can pass to the
+    keyword argument `mode` in Python's `open` function.
 
     It can be used like this:
 
-    .. code-block:: python
-
-       from filehandlers import OpenModes
-       open("myfile.txt", mode=OpenModes.READ.value)
+    ```python
+    from filehandlers import OpenModes
+    open("myfile.txt", mode=OpenModes.READ.value)
+    ```
 
     This can help so you don't need to remember all the different
-    :code:`mode` options.
+    `mode` options.
 
-    .. warning::
-       For the :code:`write` option, the file will be cleared and
-       then written to. To avoid this, use :code:`append` instead!
+    Warning:
+       For the `write` option, the file will be cleared and
+       then written to. To avoid this, use `append` instead!
 
-    .. note::
+    Note:
         Text mode should be used when writing text files
         (whether using plain text or a text-based format like TXT),
         while binary mode must be used when writing non-text files like images.
