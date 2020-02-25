@@ -7,4 +7,4 @@ Package containing code to help in working with files.
 
 ## Documentation
 
-We have documentation located [here](https://filehandlers.rdil.rocks).
+We have documentation located [here](https://docs.rdil.rocks/libraries/filehandlers/).

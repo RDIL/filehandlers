@@ -4,7 +4,6 @@ import io
 import os
 import enum
 from json import loads
-from json.decoder import JSONDecodeError  # noqa
 from typing import Optional, Dict, Any, List
 
 
@@ -13,7 +12,7 @@ class AbstractFile:
 
     def __init__(self, name: str):
         """
-        Create the class.
+        Creates the class.
 
         Args:
             name: The file name.
@@ -34,10 +33,12 @@ class AbstractFile:
 
     def wrap(self):
         """
-        Wrap the file in a [io.TextIOWrapper].
+        Wrap the file in a `TextIOWrapper` (part of the Python standard library,
+        return type of `open()`).
 
         Returns:
             The wrapper.
+
         Raises:
             PermissionError: If you don't have needed permission to access the file.
         """
@@ -47,9 +48,11 @@ class AbstractFile:
         """
         Create the file if it doesn't already exist.
 
-        Important:
-           This is the only method that actually changes/interacts with the file
-           inside the AbstractFile class (other then [wrap] and [exists]).
+        !!! important
+            This is the only method that actually changes/interacts with the file
+            inside the AbstractFile class (other then
+            [`wrap`](#filehandlers.AbstractFile.wrap) and
+            [`exists`](#filehandlers.AbstractFile.exists)).
 
         In case you are wondering, the name for this function comes from the Unix command
         `touch`, which creates a new file with the name as a parameter.
@@ -184,8 +187,8 @@ class FileManipulator:
             string: What to write to the file.
 
         Raises:
-           PermissionError: If you don't have needed permission to access the file.
-           TypeError: If you pass an unsupported type to be written.
+            PermissionError: If you don't have needed permission to access the file.
+            TypeError: If you pass an unsupported type to be written.
 
         Returns:
             Nothing.
@@ -255,13 +258,15 @@ class FileManipulator:
 
         Raises:
             JSONDecodeError: If it isn't valid JSON.
+            PermissionError: If you don't have needed permission to access the file.
+            FileNotFoundError: If the file doesn't exist.
         """
         return loads(self.get_file_contents_singlestring())
 
 
 class OpenModes(enum.Enum):
     """
-    [Enum][enum.Enum] for the different options you can pass to the
+    Enum for the different options you can pass to the
     keyword argument `mode` in Python's `open` function.
 
     It can be used like this:
@@ -274,15 +279,16 @@ class OpenModes(enum.Enum):
     This can help so you don't need to remember all the different
     `mode` options.
 
-    Warning:
-       For the `write` option, the file will be cleared and
-       then written to. To avoid this, use `append` instead!
+    !!! danger "Using `WRITE`"
+        For the `write` option, the file will be cleared and
+        then written to. To avoid this, use `append` instead!
 
-    Note:
+    !!! tip "Binary mode vs Text mode"
         Text mode should be used when writing text files
         (whether using plain text or a text-based format like TXT),
         while binary mode must be used when writing non-text files like images.
     """
+
     READ = "r"  #: Read only access to the file.
     READ_BINARY = "rb"  # Read only access to the file (binary enabled).
     WRITE = "w"  #: Write only access to the file - ***see warning above***.
