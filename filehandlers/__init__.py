@@ -88,6 +88,7 @@ class AbstractFile:
 
 class FileManipulator:
     """Class used for managing an assigned file."""
+
     cache: List[str]
     theFile: AbstractFile
 
@@ -102,7 +103,7 @@ class FileManipulator:
             Nothing.
 
         Raises:
-            TypeError: If the argument isn't an [AbstractFile].
+            TypeError: If the argument isn't an AbstractFile.
         """
         self.cache = []
         if type(abstract_file) == AbstractFile:
@@ -142,23 +143,19 @@ class FileManipulator:
         Raises:
             PermissionError: If you don't have needed permission to access the file.
         """
+        if not self.get_file().exists():
+            # file doesn't exist, exit early
+            return
+
         with open(self.get_file_name(), mode="r") as fh:
-            if not type(fh) is io.TextIOWrapper:
-                raise TypeError("Could not create TextIOWrapper for the file")
-            else:
-                self.cache = fh.readlines()
-                # strip newlines
-                for h, g in enumerate(self.cache):
-                    if(
-                        slim and (
-                            self.cache[h] is None or
-                            self.cache[h] == ""
-                        )
-                    ):
-                        self.cache.pop(h)
-                    else:
-                        self.cache[h] = self.cache[h].replace("\n", "")
-                fh.close()
+            self.cache = fh.readlines()
+            # strip newlines
+            for h, g in enumerate(self.cache):
+                if slim and self.cache[h] == "":
+                    self.cache.pop(h)
+                else:
+                    self.cache[h] = self.cache[h].replace("\n", "")
+            fh.close()
 
     def get_cache(self) -> List[str]:
         """
@@ -189,6 +186,7 @@ class FileManipulator:
         Raises:
             PermissionError: If you don't have needed permission to access the file.
             TypeError: If you pass an unsupported type to be written.
+            FileNotFoundError: If the file doesn't exist.
 
         Returns:
             Nothing.
@@ -217,6 +215,7 @@ class FileManipulator:
 
         Raises:
             PermissionError: If you don't have needed permission to access the file.
+            FileNotFoundError: If the file doesn't exist.
         """
         open(str(self.get_file()), mode="w").close()
 
@@ -231,6 +230,7 @@ class FileManipulator:
 
         Raises:
             PermissionError: If you don't have needed permission to access the file.
+            FileNotFoundError: If the file doesn't exist.
         """
         return open(str(self.get_file()), mode="r").read()
 
