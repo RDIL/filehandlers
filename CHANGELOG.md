@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.12.1
+
+```diff
++ Add autodoc-working docstrings to OpenModes
+```
+
 ## v2.12.0
 
 ```diff

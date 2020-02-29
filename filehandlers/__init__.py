@@ -176,9 +176,9 @@ class FileManipulator:
         """
         Write to the file.
 
-        Note:
-           Please ensure that what you are writing to the file
-           is a string.
+        !!! warning "Types"
+            Please ensure that what you are writing to the file
+            is a string.
 
         Arguments:
             string: What to write to the file.
@@ -289,14 +289,25 @@ class OpenModes(enum.Enum):
         while binary mode must be used when writing non-text files like images.
     """
 
-    READ = "r"  #: Read only access to the file.
-    READ_BINARY = "rb"  # Read only access to the file (binary enabled).
-    WRITE = "w"  #: Write only access to the file - ***see warning above***.
-    WRITE_BINARY = "wb"  # Write only access to the file - ***see warning above*** (binary enabled).
-    CLEAR = WRITE  #: Clear the file.
-    APPEND = "a"  #: Append to the end of the file (also gives read!).
-    CREATE = "x"  #: Create the file - ***raises error if file exists***.
-    CREATE_AND_WRITE = "w+"  #: Create the file and ready it to be written to.
-    TEXT = "t"  #: Default.
-    BINARY = "b"  #: Open in binary mode.
-    UPDATING = "+"  #: This will open a file for reading and writing (updating).
+    """Read only access to the file."""
+    READ = "r"
+    """Read only access to the file (binary enabled)."""
+    READ_BINARY = "rb"
+    """Write only access to the file - ***see warning above***."""
+    WRITE = "w"
+    """Write only access to the file - ***see warning above*** (binary enabled)."""
+    WRITE_BINARY = "wb"
+    """Clear the file."""
+    CLEAR = WRITE
+    """Append to the end of the file (also gives read!)."""
+    APPEND = "a"
+    """Create the file - ***raises error if file exists***."""
+    CREATE = "x"
+    """Create the file and ready it to be written to."""
+    CREATE_AND_WRITE = "w+"
+    """The default option for the built-in `open` function."""
+    TEXT = "t"
+    """Open in binary mode."""
+    BINARY = "b"
+    """This will open a file for reading and writing (updating)."""
+    UPDATING = "+"
