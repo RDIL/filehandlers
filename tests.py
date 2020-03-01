@@ -5,7 +5,10 @@ import os
 
 class Tests(unittest.TestCase):
     def setUp(self):
-        os.remove("test.txt")
+        try:
+            os.remove("test.txt")
+        except:
+            pleaseIgnoreThis = None  # noqa
         self.af = filehandlers.AbstractFile("test.txt")
         self.m = filehandlers.FileManipulator(self.af)
         self.af.touch()
