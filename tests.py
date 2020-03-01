@@ -33,8 +33,7 @@ class Tests(unittest.TestCase):
             textwrap.dedent(
                 """\
                     cool
-                    things\
-                """
+                    things"""  # noqa
             )
         )
 
