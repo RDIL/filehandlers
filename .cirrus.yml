@@ -1,12 +1,15 @@
 container:
-  image: python:slim
+  image: python:latest
 
 flake8_task:
   container:
     image: alpine/flake8:latest
   script: flake8
 
-package_build_task:
-  script: python3 setup.py sdist bdist_wheel
-  build_artifacts:
-    path: dist/*
+coverage_task:
+  env:
+    CODECOV_TOKEN: ENCRYPTED[47a03a12f173f3500c4a2fb4435be484c6213fad54d3bc2e18381f29ed3a0c3e684bb838438fae3a53b8912d0d184d8a]
+  install_script: python3 -m pip install --upgrade coverage codecov
+  script: coverage run tests.py
+  always:
+    upload_script: codecov
