@@ -9,7 +9,7 @@ class Tests(unittest.TestCase):
         self.af = filehandlers.AbstractFile("test.txt")
         self.m = filehandlers.FileManipulator(self.af)
         self.af.touch()
-    
+
     def tearDown(self):
         os.remove("test.txt")
 
@@ -30,9 +30,11 @@ class Tests(unittest.TestCase):
         self.assertEqual(self.m.get_cache(), ["cool", "things"])
         self.assertEqual(
             self.m.get_file_contents_singlestring(),
-            textwrap.dedent("""\
-                cool
-                things"""
+            textwrap.dedent(
+                """\
+                    cool
+                    things\
+                """
             )
         )
 
