@@ -34,25 +34,20 @@ class AbstractFile:
     def wrap(self):
         """
         Wrap the file in a `TextIOWrapper` (part of the Python standard library,
-        return type of `open()`).
+        return type of `open()`). The wrapper will be in read mode.
 
         Returns:
             The wrapper.
 
         Raises:
             PermissionError: If you don't have needed permission to access the file.
+            FileNotFoundError: If the file doesn't exist.
         """
-        return open(str(self), mode="a")
+        return open(str(self), mode="r")
 
     def touch(self):
         """
         Create the file if it doesn't already exist.
-
-        !!! important
-            This is the only method that actually changes/interacts with the file
-            inside the AbstractFile class (other then
-            [`wrap`](#filehandlers.AbstractFile.wrap) and
-            [`exists`](#filehandlers.AbstractFile.exists)).
 
         In case you are wondering, the name for this function comes from the Unix command
         `touch`, which creates a new file with the name as a parameter.
@@ -63,7 +58,7 @@ class AbstractFile:
         Raises:
             PermissionError: If you don't have needed permission to access the file.
         """
-        self.wrap().close()
+        open(str(self), mode="a").close()
 
     def exists(self, touch_if_false: Optional[bool] = False) -> bool:
         """
@@ -90,7 +85,7 @@ class FileManipulator:
     """Class used for managing an assigned file."""
 
     cache: List[str]
-    theFile: AbstractFile
+    _linked_abstractfile: AbstractFile
 
     def __init__(self, abstract_file: AbstractFile):
         """
@@ -107,7 +102,7 @@ class FileManipulator:
         """
         self.cache = []
         if type(abstract_file) == AbstractFile:
-            self.theFile = abstract_file
+            self._linked_abstractfile = abstract_file
         else:
             raise TypeError("Wrong type! Please pass AbstractFile or string")
         self.refresh()
@@ -119,7 +114,7 @@ class FileManipulator:
         Returns:
             The AbstractFile instance.
         """
-        return self.theFile
+        return self._linked_abstractfile
 
     def get_file_name(self) -> str:
         """
@@ -202,7 +197,7 @@ class FileManipulator:
         Returns:
             The wrapped file.
         """
-        return self.theFile.wrap()
+        return self._linked_abstractfile.wrap()
 
     def clear_file(self):
         """
@@ -223,7 +218,8 @@ class FileManipulator:
         """
         Get the file's contents, but as one multi-line string.
 
-        Important: This function does not use the cache.
+        !!! warning
+            This function does not use the cache.
 
         Returns:
             The file's contents.
