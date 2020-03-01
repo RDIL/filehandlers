@@ -186,7 +186,7 @@ class FileManipulator:
         Returns:
             Nothing.
         """
-        e = self.wrap_file()
+        e = open(str(self.get_file()), mode="w")
         e.write(string)
         e.close()
 

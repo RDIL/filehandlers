@@ -4,29 +4,30 @@ import os
 
 
 class Tests(unittest.TestCase):
-    def test_file_naming(self):
-        self.assertEqual(str(filehandlers.AbstractFile("file.txt")), "file.txt")
+    def setUp(self):
+        os.remove("test.txt")
+        self.af = filehandlers.AbstractFile("test.txt")
+        self.m = filehandlers.FileManipulator(self.af)
+        self.af.touch()
 
-    def test_file_creation_and_exists(self):
-        af = filehandlers.AbstractFile("test.txt")
-        self.assertFalse(af.exists())
-        af.touch()
-        self.assertTrue(af.exists())
-        os.remove(str(af))
+    def cleanUp(self):
+        os.remove(str(self.af))
+
+    def test_file_naming(self):
+        self.assertEqual(str(self.af), "test.txt")
+
+    def test_file_exists(self):
+        self.assertTrue(self.af.exists())
 
     def test_writing_to_files(self):
-        af = filehandlers.AbstractFile("test.txt")
-        m = filehandlers.FileManipulator(af)
-        self.assertFalse(af.exists())
-        af.touch()
-        self.assertTrue(af.exists())
-        self.assertEqual(af.wrap().read(), "")
-        self.assertEqual(m.get_cache(), [])
-        m.write_to_file("cool\nthings")
-        m.refresh()
-        self.assertEqual(af.wrap().read(), "cool\nthings")
-        self.assertEqual(m.get_cache(), ["cool", "things"])
-        os.remove(str(af))
+        self.assertTrue(self.af.exists())
+        b = self.af.wrap()
+        self.assertEqual(b.read(), "")
+        b.close()  # to fix resourcewarning
+        self.assertEqual(self.m.get_cache(), [])
+        self.m.write_to_file("cool\nthings")
+        self.m.refresh()
+        self.assertEqual(self.m.get_cache(), ["cool", "things"])
 
 
 if __name__ == "__main__":
