@@ -10,9 +10,6 @@ class Tests(unittest.TestCase):
         self.m = filehandlers.FileManipulator(self.af)
         self.af.touch()
 
-    def cleanUp(self):
-        os.remove(str(self.af))
-
     def test_file_naming(self):
         self.assertEqual(str(self.af), "test.txt")
 
