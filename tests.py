@@ -1,17 +1,17 @@
 import unittest
 import filehandlers
 import os
+import textwrap
 
 
 class Tests(unittest.TestCase):
     def setUp(self):
-        try:
-            os.remove("test.txt")
-        except:  # noqa
-            ignoreThis = None  # noqa
         self.af = filehandlers.AbstractFile("test.txt")
         self.m = filehandlers.FileManipulator(self.af)
         self.af.touch()
+    
+    def tearDown(self):
+        os.remove("test.txt")
 
     def test_file_naming(self):
         self.assertEqual(str(self.af), "test.txt")
@@ -28,6 +28,13 @@ class Tests(unittest.TestCase):
         self.m.write_to_file("cool\nthings")
         self.m.refresh()
         self.assertEqual(self.m.get_cache(), ["cool", "things"])
+        self.assertEqual(
+            self.m.get_file_contents_singlestring(),
+            textwrap.dedent("""\
+                cool
+                things"""
+            )
+        )
 
 
 if __name__ == "__main__":
