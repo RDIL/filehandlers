@@ -1,6 +1,5 @@
 import unittest
 import filehandlers
-import os
 import textwrap
 
 
@@ -11,7 +10,7 @@ class Tests(unittest.TestCase):
         self.af.touch()
 
     def tearDown(self):
-        os.remove("test.txt")
+        self.m.delete()
 
     def test_file_naming(self):
         self.assertEqual(str(self.af), "test.txt")
@@ -34,7 +33,7 @@ class Tests(unittest.TestCase):
                 """\
                     cool
                     things"""  # noqa
-            )
+            )  # noqa
         )
 
 
