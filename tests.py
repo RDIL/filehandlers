@@ -1,6 +1,7 @@
 import unittest
 import filehandlers
 import textwrap
+import os
 
 
 class Tests(unittest.TestCase):
@@ -35,6 +36,14 @@ class Tests(unittest.TestCase):
                     things"""  # noqa
             )  # noqa
         )
+
+    @unittest.skipUnless(os.getenv("CIRRUS_CI") is not None, reason="not CI")
+    def test_abspath(self):
+        self.assertEqual(abs(self.af), "/tmp/cirrus-ci-build/test.txt")
+
+    def test_semistrict_types(self):
+        with self.assertRaises(TypeError):
+            filehandlers.FileManipulator(0)  # wrong type on purpose
 
 
 if __name__ == "__main__":
