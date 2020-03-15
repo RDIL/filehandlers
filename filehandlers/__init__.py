@@ -42,20 +42,6 @@ class AbstractFile:
         """
         return os.path.abspath(self.name)
 
-    def wrap(self):
-        """
-        Wrap the file in a `TextIOWrapper` (part of the Python standard library,
-        return type of `open()`). The wrapper will be in read mode.
-
-        Returns:
-            The wrapper.
-
-        Raises:
-            PermissionError: If you don't have needed permission to access the file.
-            FileNotFoundError: If the file doesn't exist.
-        """
-        return open(str(self), mode="r")
-
     def touch(self):
         """
         Create the file if it doesn't already exist.
@@ -200,15 +186,6 @@ class FileManipulator:
         e = open(str(self.get_file()), mode="w")
         e.write(string)
         e.close()
-
-    def wrap_file(self) -> io.TextIOWrapper:
-        """
-        Shortcut for `self.get_file().wrap()`.
-
-        Returns:
-            The wrapped file.
-        """
-        return self._linked_abstractfile.wrap()
 
     def clear_file(self):
         """
