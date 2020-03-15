@@ -1,6 +1,5 @@
 """The main module."""
 
-import io
 import os
 import enum
 from json import loads
