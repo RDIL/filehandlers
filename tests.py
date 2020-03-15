@@ -21,7 +21,7 @@ class Tests(unittest.TestCase):
 
     def test_writing_to_files(self):
         self.assertTrue(self.af.exists())
-        b = open(str(self.af), mode=OpenModes.READ.value)
+        b = open(str(self.af), mode=filehandlers.OpenModes.READ.value)
         self.assertEqual(b.read(), "")
         b.close()  # to fix resourcewarning
         self.assertEqual(self.m.get_cache(), [])
