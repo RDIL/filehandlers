@@ -6,6 +6,7 @@
 + Added tests and code coverage
 + Added abs() override to AbstractFile
 * Fixed certain resource leaks
+- Removed now-redundant 'wrap' methods
 ```
 
 ## v2.12.1
