@@ -5,21 +5,28 @@ import os
 
 
 class Tests(unittest.TestCase):
+    """The tests."""
+
     def setUp(self):
+        """Sets up for the tests."""
         self.af = filehandlers.AbstractFile("test.txt")
         self.m = filehandlers.FileManipulator(self.af)
         self.af.touch()
 
     def tearDown(self):
+        """Clears away old stuff after the tests."""
         self.m.delete()
 
     def test_file_naming(self):
+        """Test that the file is named the correct thing."""
         self.assertEqual(str(self.af), "test.txt")
 
     def test_file_exists(self):
+        """Test that the file exists."""
         self.assertTrue(self.af.exists())
 
     def test_writing_to_files(self):
+        """Test that we can write to files."""
         self.assertTrue(self.af.exists())
         b = open(str(self.af), mode=filehandlers.OpenModes.READ.value)
         self.assertEqual(b.read(), "")
@@ -39,9 +46,11 @@ class Tests(unittest.TestCase):
 
     @unittest.skipUnless(os.getenv("CIRRUS_CI") is not None, reason="not CI")
     def test_abspath(self):
+        """Test that the absolute path of the file is correct if in CI."""
         self.assertEqual(abs(self.af), "/tmp/cirrus-ci-build/test.txt")
 
     def test_semistrict_types(self):
+        """Test that FileManipulators can only be created with AbstractFiles."""
         with self.assertRaises(TypeError):
             filehandlers.FileManipulator(0)  # wrong type on purpose
 
