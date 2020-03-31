@@ -34,7 +34,7 @@ class Tests(unittest.TestCase):
                 """\
                     cool
                     things"""  # noqa
-            )  # noqa
+            ),  # noqa
         )
 
     @unittest.skipUnless(os.getenv("CIRRUS_CI") is not None, reason="not CI")
