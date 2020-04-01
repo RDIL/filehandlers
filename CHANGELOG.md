@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.1
+
+```diff
++ Added return type annotations to some functions.
+```
+
 ## v3.0.0
 
 ```diff

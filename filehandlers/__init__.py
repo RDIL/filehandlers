@@ -41,7 +41,7 @@ class AbstractFile:
         """
         return os.path.abspath(self.name)
 
-    def touch(self):
+    def touch(self) -> None:
         """
         Create the file if it doesn't already exist.
 
@@ -83,7 +83,7 @@ class FileManipulator:
     cache: List[str]
     _linked_abstractfile: AbstractFile
 
-    def __init__(self, abstract_file: AbstractFile):
+    def __init__(self, abstract_file: AbstractFile) -> None:
         """
         Create class instance.
 
@@ -121,7 +121,7 @@ class FileManipulator:
         """
         return str(self.get_file())
 
-    def refresh(self, slim: Optional[bool] = False):
+    def refresh(self, slim: Optional[bool] = False) -> None:
         """
         Update the cache.
 
@@ -163,7 +163,7 @@ class FileManipulator:
         """
         return self.cache
 
-    def write_to_file(self, string: str):
+    def write_to_file(self, string: str) -> None:
         """
         Write to the file.
 
@@ -186,7 +186,7 @@ class FileManipulator:
         e.write(string)
         e.close()
 
-    def clear_file(self):
+    def clear_file(self) -> None:
         """
         Clear the file.
 
@@ -220,7 +220,7 @@ class FileManipulator:
         o.close()
         return string
 
-    def delete(self):
+    def delete(self) -> bool:
         """
         Delete the file if it exists.
 
