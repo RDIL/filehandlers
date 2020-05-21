@@ -1,11 +1,8 @@
 import setuptools
 
-with open("README.md", mode="r") as FILE_HANDLER:
-    LONG_DESCRIPTION = FILE_HANDLER.read()
-
 setuptools.setup(
     name="filehandlers",
-    version="3.0.1",
+    version="3.1.0",
     license="MIT",
     description="Package containing code to help in working with files.",
     packages=setuptools.find_packages(),
@@ -17,10 +14,30 @@ setuptools.setup(
         "Source Code": "https://github.com/RDIL/filehandlers",
         "Bug Tracker": "https://github.com/RDIL/filehandlers/issues",
     },
-    long_description=LONG_DESCRIPTION,
+    long_description=open("README.md", mode="r").read(),
     long_description_content_type="text/markdown",
     include_package_data=True,
     zip_safe=False,
     keywords=["file", "files", "handler", "handlers", "io"],
     python_requires=">=3.3",
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Information Technology",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Operating System :: MacOS",
+        "Operating System :: Microsoft :: Windows",
+        "Operating System :: Unix",
+        "Operating System :: POSIX",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Topic :: System :: Filesystems",
+        "Topic :: Utilities",
+        "Typing :: Typed",
+    ],
 )

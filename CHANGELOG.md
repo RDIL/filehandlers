@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.1.0
+
+```diff
++ Add AbstractFile.parent_directory function
++ Add code of conduct and security documentation pages
++ Added PyPI classifiers
+```
+
 ## v3.0.1
 
 ```diff
