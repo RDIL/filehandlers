@@ -54,6 +54,11 @@ class Tests(unittest.TestCase):
         with self.assertRaises(TypeError):
             filehandlers.FileManipulator(0)  # wrong type on purpose
 
+    @unittest.skipUnless(os.getenv("CIRRUS_CI") is not None, reason="not CI")
+    def test_parent_directory(self):
+        """Test the AbstractFile.parent_directory function."""
+        self.assertEqual(self.af.parent_directory(), "/tmp/cirrus-ci-build")
+
 
 if __name__ == "__main__":
     unittest.main()

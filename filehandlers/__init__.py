@@ -9,7 +9,7 @@ from typing import Optional, Dict, Any, List
 class AbstractFile:
     """A file in instance form."""
 
-    def __init__(self, name: str):
+    def __init__(self, name: str) -> None:
         """
         Creates the class.
 
@@ -75,6 +75,15 @@ class AbstractFile:
             if touch_if_false:
                 self.touch()
         return e
+
+    def parent_directory(self) -> str:
+        """
+        Get the parent directory of this file's path.
+
+        Returns:
+            The absolute path to the parent directory.
+        """
+        return os.path.abspath(os.path.dirname(self.name))
 
 
 class FileManipulator:
